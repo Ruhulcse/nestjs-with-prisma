@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DBService } from './db.service';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { PrismaService } from 'prisma/prisma.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const dbService: DBService = app.get(DBService);
+  const dbService: PrismaService = app.get(PrismaService);
   dbService.enableShutdownHooks(app);
   const config = new DocumentBuilder()
     .setTitle('Median')
