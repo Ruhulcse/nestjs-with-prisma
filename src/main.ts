@@ -3,10 +3,11 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { PrismaService } from 'prisma/prisma.service';
 import { ValidationPipe } from '@nestjs/common';
-
+import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.use(cookieParser());
   const dbService: PrismaService = app.get(PrismaService);
   dbService.enableShutdownHooks(app);
   const config = new DocumentBuilder()
